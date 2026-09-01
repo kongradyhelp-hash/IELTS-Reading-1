@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning by Examples — IELTS Reading Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #c25e1a;
+      --primary-light: #fff7ed;
+      --primary-border: #fed7aa;
+      --primary-hover: #9a3412;
+      --accent-blue: #0284c7;
+      --accent-blue-light: #f0f9ff;
+      --accent-purple: #7c3aed;
+      --accent-purple-light: #faf5ff;
+      --accent-pink: #db2777;
+      --accent-pink-light: #fdf2f8;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      height: 64px;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      background: #0f172a;
+      color: #f59e0b;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 6px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #d97706;
+    }
+
+    .logo-text .subtitle {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--border-color);
+    }
+
+    .test-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .test-title span {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.8rem;
+    }
+
+    .passage-info {
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .score-badge {
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+    }
+
+    .instruction-tooltip {
+      color: #d97706;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .app-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .passage-pane {
+      width: 48%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 2rem;
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      line-height: 1.75;
+      font-size: 0.96rem;
+      color: #334155;
+      scroll-behavior: smooth;
+    }
+
+    .passage-heading-area {
+      margin-bottom: 1.5rem;
+    }
+
+    .passage-main-title {
+      font-family: 'Lora', serif;
+      font-size: 1.85rem;
+      color: #c2410c;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .passage-subtext {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .summary-card {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      border-radius: var(--radius-sm);
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 2rem;
+      border-top: 1px solid #fef3c7;
+      border-right: 1px solid #fef3c7;
+      border-bottom: 1px solid #fef3c7;
+    }
+
+    .summary-card-title {
+      color: #b45309;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .summary-card-body {
+      font-size: 0.88rem;
+      color: #78350f;
+      line-height: 1.55;
+    }
+
+    .paragraph-block {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.65rem;
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.6rem;
+      margin-left: -0.6rem;
+      margin-right: -0.6rem;
+      transition: background-color 0.4s ease, outline 0.2s ease;
+    }
+
+    .paragraph-block.highlight-target {
+      background-color: #fef08a !important;
+      outline: 2px solid #eab308;
+    }
+
+    .p-label {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid #ea580c;
+      color: #ea580c;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-right: 0.85rem;
+      margin-top: 2px;
+      background: #fff;
+    }
+
+    .p-text {
+      flex: 1;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.98rem;
+      color: #27272a;
+    }
+
+    .passage-word {
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 0 1px;
+      transition: background 0.15s ease;
+    }
+
+    .passage-word:hover {
+      background-color: #fef3c7;
+      color: #b45309;
+    }
+
+    .question-pane {
+      width: 52%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+
+    .tabs-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      padding: 0 1.5rem;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .tab-btn {
+      padding: 0.85rem 1.4rem;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem 2.2rem;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ea580c;
+      margin-bottom: 0.4rem;
+      font-family: 'Lora', serif;
+    }
+
+    .section-instructions {
+      font-size: 0.88rem;
+      color: #475569;
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .question-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.4rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .question-card.answered-correct {
+      border-color: var(--correct-border);
+      background: #fafdfc;
+    }
+
+    .question-card.answered-wrong {
+      border-color: var(--wrong-border);
+      background: #fdfafb;
+    }
+
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .q-number {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: #f43f5e;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .q-text {
+      flex: 1;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    .helper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      margin-left: 2.6rem;
+    }
+
+    .helper-btn {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn-paragraph {
+      background: var(--accent-pink-light);
+      color: var(--accent-pink);
+      border-color: #fbcfe8;
+    }
+    .btn-paragraph:hover {
+      background: #fce7f3;
+    }
+
+    .btn-paraphrase {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border-color: #bae6fd;
+    }
+    .btn-paraphrase:hover {
+      background: #e0f2fe;
+    }
+
+    .btn-scan {
+      background: var(--accent-purple-light);
+      color: var(--accent-purple);
+      border-color: #e9d5ff;
+    }
+    .btn-scan:hover {
+      background: #f3e8ff;
+    }
+
+    .helper-drawer {
+      display: none;
+      font-size: 0.8rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.85rem;
+      margin-left: 2.6rem;
+      line-height: 1.45;
+    }
+
+    .helper-drawer.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .helper-drawer.paraphrase-box {
+      background: var(--accent-blue-light);
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+    }
+
+    .helper-drawer.scan-box {
+      background: var(--accent-purple-light);
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-left: 2.6rem;
+    }
+
+    .options-grid.inline-layout {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .opt-btn:hover {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .opt-btn .opt-badge {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      background: #f1f5f9;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .opt-btn.is-correct {
+      border-color: var(--correct-border) !important;
+      background: var(--correct-bg) !important;
+      color: var(--correct-text) !important;
+    }
+
+    .opt-btn.is-correct .opt-badge {
+      background: var(--correct-border) !important;
+      color: white !important;
+    }
+
+    .opt-btn.is-wrong {
+      border-color: var(--wrong-border) !important;
+      background: var(--wrong-bg) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .opt-btn.is-wrong .opt-badge {
+      background: var(--wrong-border) !important;
+      color: white !important;
+    }
+
+    .feedback-box {
+      margin-top: 0.75rem;
+      margin-left: 2.6rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .feedback-box.show {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .feedback-box.correct {
+      background: var(--correct-bg);
+      color: var(--correct-text);
+      border: 1px solid #a7f3d0;
+    }
+
+    .feedback-box.wrong {
+      background: var(--wrong-bg);
+      color: var(--wrong-text);
+      border: 1px solid #fecaca;
+    }
+
+    /* Summary Section */
+    .word-pool-card {
+      background: #ffffff;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .word-pool-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.65rem;
+    }
+
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .word-pill {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #1e293b;
+      font-weight: 600;
+      font-size: 0.84rem;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .summary-text-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      line-height: 2.2;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    .summary-drop-gap {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      vertical-align: middle;
+      margin: 0 4px;
+    }
+
+    .gap-select {
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .gap-select:focus {
+      border-color: #3b82f6;
+      background: #fff;
+    }
+
+    .gap-select.correct {
+      border-color: var(--correct-border);
+      background: var(--correct-bg);
+      color: var(--correct-text);
+      font-weight: 700;
+    }
+
+    .gap-select.wrong {
+      border-color: var(--wrong-border);
+      background: var(--wrong-bg);
+      color: var(--wrong-text);
+      font-weight: 700;
+    }
+
+    .gap-num-label {
+      font-weight: 700;
+      color: #f43f5e;
+      font-size: 0.85rem;
+    }
+
+    .summary-nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+    }
+
+    /* Dictionary Modal */
+    .dict-modal {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: #1e293b;
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 100;
+      max-width: 340px;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .dict-modal.show {
+      display: block;
+    }
+
+    .dict-word {
+      font-weight: 700;
+      color: #fbbf24;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .dict-def {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .dict-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Vocabulary Master Table */
+    .vocab-table-container {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .vocab-table th, .vocab-table td {
+      padding: 0.95rem 1.15rem;
+      font-size: 0.86rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .vocab-table th {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+    }
+
+    .vocab-term {
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+
+    .vocab-pos {
+      font-style: italic;
+      color: #64748b;
+      font-size: 0.78rem;
+    }
+
+    .vocab-example {
+      font-family: 'Lora', Georgia, serif;
+      color: #475569;
+      margin-top: 4px;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        height: auto;
+        overflow: auto;
+      }
+      .app-body {
+        flex-direction: column;
+        height: auto;
+      }
+      .passage-pane, .question-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+      .passage-pane {
+        border-right: none;
+        border-bottom: 2px solid var(--border-color);
+        max-height: 550px;
+        overflow-y: auto;
+      }
+      header {
+        height: auto;
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header>
+    <div class="brand-section">
+      <div class="logo-container">
+        <div class="logo-badge">IFL</div>
+        <div class="logo-text">
+          <span class="title">IFL PLANER</span>
+          <span class="subtitle">YOUR EDUCATION IS OUR PRIORITY</span>
+        </div>
+      </div>
+      <div class="header-divider"></div>
+      <div class="test-title">Learning by Examples <span>— IELTS Reading Test</span></div>
+    </div>
+    
+    <div class="header-meta">
+      <span class="passage-info">Passage A–G · 13 Questions</span>
+      <span class="score-badge" id="scoreTracker">Score: 0 / 13</span>
+      <span class="instruction-tooltip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        Click text for definition
+      </span>
+    </div>
+  </header>
+
+  <!-- Main App Body -->
+  <main class="app-body">
+    
+    <!-- LEFT PANEL: Reading Passage -->
+    <section class="passage-pane" id="passageContainer">
+      <div class="passage-heading-area">
+        <h1 class="passage-main-title">Learning by Examples</h1>
+        <div class="passage-subtext">Reading Passage 1 · Click any word for its definition</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-title">Quick Summary</div>
+        <div class="summary-card-body">
+          This passage explores animal learning mechanisms beyond classical conditioning. It features research on Israeli black rats acquiring pine cone stripping techniques from their mothers, and comparative experiments on seed caching memory between solitary Clark's Nutcrackers and social Mexican Jays.
+        </div>
+      </div>
+
+      <article id="passageText">
+        <div class="paragraph-block" id="para-A">
+          <div class="p-label">A</div>
+          <div class="p-text">
+            Learning Theory is rooted in the work of Ivan Pavlov, the famous scientist who discovered and documented the principles governing how animals (humans included) learn in the 1900s. Two basic kinds of learning or conditioning occur, one of which is famously known as the classical conditioning. Classical conditioning happens when an animal learns to associate a neutral stimulus (signal) with a stimulus that has intrinsic meaning based on how closely in time the two stimuli are presented. The classic example of classical conditioning is a dog's ability to associate the sound of a bell (something that originally has no meaning to the dog) with the presentation of food (something that has a lot of meaning to the dog) a few moments later. Dogs are able to learn the association between bell and food, and will salivate immediately after hearing the bell once this connection has been made. Years of learning research have led to the creation of a highly precise learning theory that can be used to understand and predict how and under what circumstances most any animal will learn, including human beings, and eventually help people figure out how to change their behaviours.
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-B">
+          <div class="p-label">B</div>
+          <div class="p-text">
+            Role models are a popular notion for guiding child development, but in recent years very interesting research has been done on learning by examples in other animals. If the subject of animal learning is taught very much in terms of classical or operant conditioning, it places too much emphasis on how we allow animals to learn and not enough on how they are equipped to learn. To teach a course of mine, I have been dipping profitably into a very interesting and accessible compilation of papers on social learning in mammals, including chimps and human children, edited by Heyes and Galef (1996).
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-C">
+          <div class="p-label">C</div>
+          <div class="p-text">
+            The research reported in one paper started with a school field trip to Israel to a pine forest where many pine cones were discovered, stripped to the central core. So the investigation started with no weighty theoretical intent, but was directed at finding out who was eating the nutritious pine seeds and how they managed to get them out of the cones. The culprit proved to be the versatile and athletic black rat, (<em>Rattus rattus</em>), and the technique was to bite each cone scale off at its base, in sequence from base to tip following the spiral growth pattern of the cone.
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-D">
+          <div class="p-label">D</div>
+          <div class="p-text">
+            Urban black rats were found to lack the skill and were unable to learn it even if housed with experienced cone strippers. However, infants of urban mothers cross-fostered by stripper mothers acquired the skill, whereas infants of stripper mothers fostered by an urban mother could not. Clearly the skill had to be learned from the mother. Further elegant experiments showed that naive adults could develop the skill if they were provided with cones from which the first complete spiral of scales had been removed; rather like our new photocopier which you can work out how to use once someone has shown you how to switch it on. In the case of rats, the young-rats take cones away from the mother when she is still feeding on them, allowing them to acquire the complete stripping skill.
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-E">
+          <div class="p-label">E</div>
+          <div class="p-text">
+            A good example of adaptive bearing we might conclude, but let's see the economics. This was determined by measuring oxygen uptake of a rat stripping a cone in a metabolic chamber to calculate energetic cost and comparing it with the benefit of the pine seeds measured by calorimeter. The cost proved to be less than 10% of the energetic value of the cone. An acceptable profit margin.
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-F">
+          <div class="p-label">F</div>
+          <div class="p-text">
+            A paper in 1996, <em>Animal Behaviour</em> by Bednekoff and Balda, provides a different view of the adaptiveness of social learning. It concerns the seed caching behaviour of Clark's Nutcracker (<em>Nucifraga columbiana</em>) and the Mexican Jay (<em>Aphelocoma ultramarina</em>). The former is a specialist, caching 30,000 or so seeds in scattered locations that it will recover over the months of winter; the Mexican Jay will also cache food but is much less dependent upon this than the Nutcracker. The two species also differ in their social structure: the Nutcracker being rather solitary while the Jay forages in social groups.
+          </div>
+        </div>
+
+        <div class="paragraph-block" id="para-G">
+          <div class="p-label">G</div>
+          <div class="p-text">
+            The experiment is to discover not just whether a bird can remember where it hid a seed but also if it can remember where it saw another bird hide a seed. The design is slightly comical with a cacher bird wandering about a room with lots of holes in the floor hiding food in some of the holes, while watched by an observer bird perched in a cage. Two days later, cachers and observers are tested for their discovery rate against an estimated random performance. In the role of cacher, not only the Nutcracker but also the less specialised Jay performed above chance; more surprisingly, however, jay observers were as successful as jay cachers whereas nutcracker observers did no better than chance. It seems that, whereas the Nutcracker is highly adapted at remembering where it hid its own seeds, the social living Mexican Jay is more adept at remembering, and so exploiting, the caches of others.
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- RIGHT PANEL: Question Tabs -->
+    <section class="question-pane">
+      
+      <nav class="tabs-header">
+        <button class="tab-btn active" onclick="switchTab('tab1', this)">Q1–4</button>
+        <button class="tab-btn" onclick="switchTab('tab2', this)">Q5–8</button>
+        <button class="tab-btn" onclick="switchTab('tab3', this)">Q9–13</button>
+        <button class="tab-btn" onclick="switchTab('tab4', this)">VOCABULARY</button>
+      </nav>
+
+      <div class="tab-content-area">
+        
+        <!-- ================= TAB 1: Questions 1-4 (NO Find in Paragraph) ================= -->
+        <div id="tab1" class="tab-panel active">
+          <h2 class="section-title">Questions 1–4</h2>
+          <p class="section-instructions">
+            Reading Passage 1 has seven paragraphs <strong>A–G</strong>. Which paragraph contains the following information? Choose the correct paragraph letter.
+          </p>
+
+          <!-- Question 1 -->
+          <div class="question-card" id="qcard-1">
+            <div class="q-header">
+              <span class="q-number">1</span>
+              <div class="q-text">A comparison between rats' learning and human learning</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-1')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-1')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-1" class="helper-drawer paraphrase-box">
+              <strong>Paraphrase clue:</strong> "...rather like our new photocopier which you can work out how to use once someone has shown you how to switch it on."
+            </div>
+            <div id="sc-1" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> rats, photocopier, human, work out, shown.
+            </div>
+            <div class="options-grid inline-layout" data-qid="1" data-answer="D">
+              <button class="opt-btn" onclick="checkChoice(1, 'A', this)"><span class="opt-badge">A</span> A</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'B', this)"><span class="opt-badge">B</span> B</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'C', this)"><span class="opt-badge">C</span> C</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'D', this)"><span class="opt-badge">D</span> D</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'E', this)"><span class="opt-badge">E</span> E</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'F', this)"><span class="opt-badge">F</span> F</button>
+              <button class="opt-btn" onclick="checkChoice(1, 'G', this)"><span class="opt-badge">G</span> G</button>
+            </div>
+            <div class="feedback-box" id="fb-1"></div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="question-card" id="qcard-2">
+            <div class="q-header">
+              <span class="q-number">2</span>
+              <div class="q-text">A reference to the earliest study in animal learning</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-2')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-2')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-2" class="helper-drawer paraphrase-box">
+              <strong>Paraphrase clue:</strong> "rooted in the work of Ivan Pavlov... who discovered and documented... in the 1900s."
+            </div>
+            <div id="sc-2" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> 1900s, Ivan Pavlov, classical conditioning, rooted.
+            </div>
+            <div class="options-grid inline-layout" data-qid="2" data-answer="A">
+              <button class="opt-btn" onclick="checkChoice(2, 'A', this)"><span class="opt-badge">A</span> A</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'B', this)"><span class="opt-badge">B</span> B</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'C', this)"><span class="opt-badge">C</span> C</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'D', this)"><span class="opt-badge">D</span> D</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'E', this)"><span class="opt-badge">E</span> E</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'F', this)"><span class="opt-badge">F</span> F</button>
+              <button class="opt-btn" onclick="checkChoice(2, 'G', this)"><span class="opt-badge">G</span> G</button>
+            </div>
+            <div class="feedback-box" id="fb-2"></div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="question-card" id="qcard-3">
+            <div class="q-header">
+              <span class="q-number">3</span>
+              <div class="q-text">The discovery of who stripped the pine cone</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-3')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-3')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-3" class="helper-drawer paraphrase-box">
+              <strong>Paraphrase clue:</strong> "The culprit proved to be the versatile and athletic black rat (Rattus rattus)..."
+            </div>
+            <div id="sc-3" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> culprit, proved to be, black rat, stripped.
+            </div>
+            <div class="options-grid inline-layout" data-qid="3" data-answer="C">
+              <button class="opt-btn" onclick="checkChoice(3, 'A', this)"><span class="opt-badge">A</span> A</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'B', this)"><span class="opt-badge">B</span> B</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'C', this)"><span class="opt-badge">C</span> C</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'D', this)"><span class="opt-badge">D</span> D</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'E', this)"><span class="opt-badge">E</span> E</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'F', this)"><span class="opt-badge">F</span> F</button>
+              <button class="opt-btn" onclick="checkChoice(3, 'G', this)"><span class="opt-badge">G</span> G</button>
+            </div>
+            <div class="feedback-box" id="fb-3"></div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="question-card" id="qcard-4">
+            <div class="q-header">
+              <span class="q-number">4</span>
+              <div class="q-text">A description of a cost-effectiveness experiment</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-4')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-4')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-4" class="helper-drawer paraphrase-box">
+              <strong>Paraphrase clue:</strong> "...let's see the economics. This was determined by measuring oxygen uptake... energetic cost vs benefit... profit margin."
+            </div>
+            <div id="sc-4" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> economics, oxygen uptake, metabolic chamber, profit margin, energetic cost.
+            </div>
+            <div class="options-grid inline-layout" data-qid="4" data-answer="E">
+              <button class="opt-btn" onclick="checkChoice(4, 'A', this)"><span class="opt-badge">A</span> A</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'B', this)"><span class="opt-badge">B</span> B</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'C', this)"><span class="opt-badge">C</span> C</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'D', this)"><span class="opt-badge">D</span> D</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'E', this)"><span class="opt-badge">E</span> E</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'F', this)"><span class="opt-badge">F</span> F</button>
+              <button class="opt-btn" onclick="checkChoice(4, 'G', this)"><span class="opt-badge">G</span> G</button>
+            </div>
+            <div class="feedback-box" id="fb-4"></div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 2: Questions 5-8 (WITH Find in Paragraph) ================= -->
+        <div id="tab2" class="tab-panel">
+          <h2 class="section-title">Questions 5–8</h2>
+          <p class="section-instructions">
+            Do the following statements agree with the information given in Reading Passage 1? Choose <strong>TRUE</strong>, <strong>FALSE</strong>, or <strong>NOT GIVEN</strong>.
+          </p>
+
+          <!-- Question 5 -->
+          <div class="question-card" id="qcard-5">
+            <div class="q-header">
+              <span class="q-number">5</span>
+              <div class="q-text">The field trip to Israel was to investigate how black rats learn to strip pine cones.</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paragraph" onclick="goToParagraph('C')">📍 Find in Paragraph C</button>
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-5')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-5')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-5" class="helper-drawer paraphrase-box">
+              <strong>Contradiction note:</strong> Paragraph C explains it started with <em>no weighty theoretical intent</em>, simply to find out who was eating the seeds.
+            </div>
+            <div id="sc-5" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> field trip to Israel, no weighty theoretical intent, who was eating.
+            </div>
+            <div class="options-grid" data-qid="5" data-answer="FALSE">
+              <button class="opt-btn" onclick="checkChoice(5, 'TRUE', this)"><span class="opt-badge">T</span> TRUE</button>
+              <button class="opt-btn" onclick="checkChoice(5, 'FALSE', this)"><span class="opt-badge">F</span> FALSE</button>
+              <button class="opt-btn" onclick="checkChoice(5, 'NOT GIVEN', this)"><span class="opt-badge">NG</span> NOT GIVEN</button>
+            </div>
+            <div class="feedback-box" id="fb-5"></div>
+          </div>
+
+          <!-- Question 6 -->
+          <div class="question-card" id="qcard-6">
+            <div class="q-header">
+              <span class="q-number">6</span>
+              <div class="q-text">The pine cones were stripped from bottom to top by black rats.</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paragraph" onclick="goToParagraph('C')">📍 Find in Paragraph C</button>
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-6')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-6')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-6" class="helper-drawer paraphrase-box">
+              <strong>Agreement note:</strong> Paragraph C states: "...in sequence from base to tip following the spiral growth pattern." Base = bottom, Tip = top.
+            </div>
+            <div id="sc-6" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> sequence from base to tip, spiral growth pattern.
+            </div>
+            <div class="options-grid" data-qid="6" data-answer="TRUE">
+              <button class="opt-btn" onclick="checkChoice(6, 'TRUE', this)"><span class="opt-badge">T</span> TRUE</button>
+              <button class="opt-btn" onclick="checkChoice(6, 'FALSE', this)"><span class="opt-badge">F</span> FALSE</button>
+              <button class="opt-btn" onclick="checkChoice(6, 'NOT GIVEN', this)"><span class="opt-badge">NG</span> NOT GIVEN</button>
+            </div>
+            <div class="feedback-box" id="fb-6"></div>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-card" id="qcard-7">
+            <div class="q-header">
+              <span class="q-number">7</span>
+              <div class="q-text">It can be learned from other relevant experiences to use a photocopier.</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paragraph" onclick="goToParagraph('D')">📍 Find in Paragraph D</button>
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-7')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-7')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-7" class="helper-drawer paraphrase-box">
+              <strong>Absence note:</strong> The text mentions working out a photocopier "once someone has shown you how to switch it on", but nothing is stated about transferring other experiences.
+            </div>
+            <div id="sc-7" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> photocopier, switch it on, experience.
+            </div>
+            <div class="options-grid" data-qid="7" data-answer="NOT GIVEN">
+              <button class="opt-btn" onclick="checkChoice(7, 'TRUE', this)"><span class="opt-badge">T</span> TRUE</button>
+              <button class="opt-btn" onclick="checkChoice(7, 'FALSE', this)"><span class="opt-badge">F</span> FALSE</button>
+              <button class="opt-btn" onclick="checkChoice(7, 'NOT GIVEN', this)"><span class="opt-badge">NG</span> NOT GIVEN</button>
+            </div>
+            <div class="feedback-box" id="fb-7"></div>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-card" id="qcard-8">
+            <div class="q-header">
+              <span class="q-number">8</span>
+              <div class="q-text">Stripping the pine cones is an instinct of the black rats.</div>
+            </div>
+            <div class="helper-actions">
+              <button class="helper-btn btn-paragraph" onclick="goToParagraph('D')">📍 Find in Paragraph D</button>
+              <button class="helper-btn btn-paraphrase" onclick="toggleHelper('ph-8')">🔄 Paraphrase</button>
+              <button class="helper-btn btn-scan" onclick="toggleHelper('sc-8')">🔍 Scan Key</button>
+            </div>
+            <div id="ph-8" class="helper-drawer paraphrase-box">
+              <strong>Contradiction note:</strong> Paragraph D explicitly shows through cross-fostering that "Clearly the skill had to be learned from the mother."
+            </div>
+            <div id="sc-8" class="helper-drawer scan-box">
+              <strong>Scan keywords:</strong> cross-fostered, learned from the mother, lack the skill.
+            </div>
+            <div class="options-grid" data-qid="8" data-answer="FALSE">
+              <button class="opt-btn" onclick="checkChoice(8, 'TRUE', this)"><span class="opt-badge">T</span> TRUE</button>
+              <button class="opt-btn" onclick="checkChoice(8, 'FALSE', this)"><span class="opt-badge">F</span> FALSE</button>
+              <button class="opt-btn" onclick="checkChoice(8, 'NOT GIVEN', this)"><span class="opt-badge">NG</span> NOT GIVEN</button>
+            </div>
+            <div class="feedback-box" id="fb-8"></div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 3: Questions 9-13 (WITH Find in Paragraph) ================= -->
+        <div id="tab3" class="tab-panel">
+          <h2 class="section-title">Questions 9–13</h2>
+          <p class="section-instructions">
+            Complete the summary below using the words from the box. Select the right word from each drop-down gap.
+          </p>
+
+          <div class="word-pool-card">
+            <div class="word-pool-title">Options Box</div>
+            <div class="word-bank">
+              <span class="word-pill">less</span>
+              <span class="word-pill">social</span>
+              <span class="word-pill">remembered</span>
+              <span class="word-pill">more</span>
+              <span class="word-pill">cacher</span>
+              <span class="word-pill">watched</span>
+              <span class="word-pill">solitary</span>
+              <span class="word-pill">observer</span>
+              <span class="word-pill">Nutcracker</span>
+              <span class="word-pill">Jay</span>
+            </div>
+          </div>
+
+          <div class="summary-text-box">
+            <!-- Question 9 & 10 -->
+            <div style="margin-bottom: 0.5rem;">
+              <div class="helper-actions" style="margin-left: 0; margin-bottom: 0.5rem;">
+                <button class="helper-btn btn-paragraph" onclick="goToParagraph('F')">📍 Q9 & Q10: Find in Paragraph F</button>
+              </div>
+              While the Nutcracker is more able to cache seeds, the Jay relies 
+              <span class="summary-drop-gap">
+                <span class="gap-num-label">[9]</span>
+                <select class="gap-select" data-qid="9" data-answer="less" onchange="checkGap(this)">
+                  <option value="">-- select --</option>
+                  <option value="less">less</option>
+                  <option value="more">more</option>
+                  <option value="social">social</option>
+                  <option value="solitary">solitary</option>
+                  <option value="cacher">cacher</option>
+                  <option value="observer">observer</option>
+                  <option value="remembered">remembered</option>
+                  <option value="watched">watched</option>
+                  <option value="Nutcracker">Nutcracker</option>
+                  <option value="Jay">Jay</option>
+                </select>
+              </span>
+              on caching food and is thus less specialised in this ability, but more 
+              <span class="summary-drop-gap">
+                <span class="gap-num-label">[10]</span>
+                <select class="gap-select" data-qid="10" data-answer="social" onchange="checkGap(this)">
+                  <option value="">-- select --</option>
+                  <option value="less">less</option>
+                  <option value="more">more</option>
+                  <option value="social">social</option>
+                  <option value="solitary">solitary</option>
+                  <option value="cacher">cacher</option>
+                  <option value="observer">observer</option>
+                  <option value="remembered">remembered</option>
+                  <option value="watched">watched</option>
+                  <option value="Nutcracker">Nutcracker</option>
+                  <option value="Jay">Jay</option>
+                </select>
+              </span>.
+              To study their behaviour of caching and finding their caches, an experiment was designed and carried out to test these two birds for their ability to remember where they hid the seeds.
+            </div>
+            
+            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 1rem 0;">
+
+            <!-- Question 11, 12, 13 -->
+            <div>
+              <div class="helper-actions" style="margin-left: 0; margin-bottom: 0.5rem;">
+                <button class="helper-btn btn-paragraph" onclick="goToParagraph('G')">📍 Q11, Q12 & Q13: Find in Paragraph G</button>
+              </div>
+              In the experiment, the cacher bird hid seeds in the ground while the other 
+              <span class="summary-drop-gap">
+                <span class="gap-num-label">[11]</span>
+                <select class="gap-select" data-qid="11" data-answer="watched" onchange="checkGap(this)">
+                  <option value="">-- select --</option>
+                  <option value="less">less</option>
+                  <option value="more">more</option>
+                  <option value="social">social</option>
+                  <option value="solitary">solitary</option>
+                  <option value="cacher">cacher</option>
+                  <option value="observer">observer</option>
+                  <option value="remembered">remembered</option>
+                  <option value="watched">watched</option>
+                  <option value="Nutcracker">Nutcracker</option>
+                  <option value="Jay">Jay</option>
+                </select>
+              </span>.
+              As a result, the Nutcracker and the Mexican Jay showed different performance in the role of 
+              <span class="summary-drop-gap">
+                <span class="gap-num-label">[12]</span>
+                <select class="gap-select" data-qid="12" data-answer="observer" onchange="checkGap(this)">
+                  <option value="">-- select --</option>
+                  <option value="less">less</option>
+                  <option value="more">more</option>
+                  <option value="social">social</option>
+                  <option value="solitary">solitary</option>
+                  <option value="cacher">cacher</option>
+                  <option value="observer">observer</option>
+                  <option value="remembered">remembered</option>
+                  <option value="watched">watched</option>
+                  <option value="Nutcracker">Nutcracker</option>
+                  <option value="Jay">Jay</option>
+                </select>
+              </span>
+              at finding the seeds – the observing 
+              <span class="summary-drop-gap">
+                <span class="gap-num-label">[13]</span>
+                <select class="gap-select" data-qid="13" data-answer="Nutcracker" onchange="checkGap(this)">
+                  <option value="">-- select --</option>
+                  <option value="less">less</option>
+                  <option value="more">more</option>
+                  <option value="social">social</option>
+                  <option value="solitary">solitary</option>
+                  <option value="cacher">cacher</option>
+                  <option value="observer">observer</option>
+                  <option value="remembered">remembered</option>
+                  <option value="watched">watched</option>
+                  <option value="Nutcracker">Nutcracker</option>
+                  <option value="Jay">Jay</option>
+                </select>
+              </span>
+              didn't do as well as its counterpart.
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB 4: Vocabulary ================= -->
+        <div id="tab4" class="tab-panel">
+          <h2 class="section-title">Academic Vocabulary & Collocations</h2>
+          <p class="section-instructions">
+            High-yield academic vocabulary, idioms, and collocations extracted from the reading passage.
+          </p>
+
+          <div class="vocab-table-container">
+            <table class="vocab-table">
+              <thead>
+                <tr>
+                  <th>Term & Word Class</th>
+                  <th>Definition & Meaning</th>
+                  <th>Contextual Sentence / Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Rooted in</div>
+                    <div class="vocab-pos">phrasal verb</div>
+                  </td>
+                  <td>Having a developed basis, source, or origin in something.</td>
+                  <td>
+                    <div class="vocab-example">"Learning Theory is <strong>rooted in</strong> the work of Ivan Pavlov..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Classical Conditioning</div>
+                    <div class="vocab-pos">noun phrase</div>
+                  </td>
+                  <td>A learning process where an unconditioned stimulus is paired with a neutral signal to produce an involuntary response.</td>
+                  <td>
+                    <div class="vocab-example">"The classic example of <strong>classical conditioning</strong> is a dog associating a bell with food."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Intrinsic meaning</div>
+                    <div class="vocab-pos">collocation</div>
+                  </td>
+                  <td>Inherent, natural, or essential importance that does not rely on external association.</td>
+                  <td>
+                    <div class="vocab-example">"...a stimulus that has <strong>intrinsic meaning</strong> based on how closely in time they are presented."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Salivate</div>
+                    <div class="vocab-pos">verb</div>
+                  </td>
+                  <td>To produce saliva inside the mouth, usually stimulated by the thought or smell of food.</td>
+                  <td>
+                    <div class="vocab-example">"Dogs... will <strong>salivate</strong> immediately after hearing the bell."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Operant conditioning</div>
+                    <div class="vocab-pos">noun phrase</div>
+                  </td>
+                  <td>A method of learning that employs rewards and punishments for particular behaviors.</td>
+                  <td>
+                    <div class="vocab-example">"...taught very much in terms of classical or <strong>operant conditioning</strong>..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Dipping profitably into</div>
+                    <div class="vocab-pos">idiom / phrase</div>
+                  </td>
+                  <td>Reading or consulting portions of a text to gain beneficial and useful knowledge.</td>
+                  <td>
+                    <div class="vocab-example">"I have been <strong>dipping profitably into</strong> a very interesting compilation of papers..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Weighty intent</div>
+                    <div class="vocab-pos">noun phrase</div>
+                  </td>
+                  <td>A serious, momentous, or deeply academic purpose/objective.</td>
+                  <td>
+                    <div class="vocab-example">"The investigation started with no <strong>weighty theoretical intent</strong>..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Culprit</div>
+                    <div class="vocab-pos">noun</div>
+                  </td>
+                  <td>The organism or agent responsible for an observed effect, crime, or damage.</td>
+                  <td>
+                    <div class="vocab-example">"The <strong>culprit</strong> proved to be the versatile and athletic black rat..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Versatile</div>
+                    <div class="vocab-pos">adjective</div>
+                  </td>
+                  <td>Able to adapt to many different functions, environments, or activities skillfully.</td>
+                  <td>
+                    <div class="vocab-example">"...the <strong>versatile</strong> and athletic black rat (Rattus rattus)..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Cross-fostered</div>
+                    <div class="vocab-pos">adjective / verb</div>
+                  </td>
+                  <td>Offspring taken from biological parents and raised by surrogate foster parents from another group.</td>
+                  <td>
+                    <div class="vocab-example">"Infants of urban mothers <strong>cross-fostered</strong> by stripper mothers acquired the skill..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Naive adults</div>
+                    <div class="vocab-pos">noun phrase</div>
+                  </td>
+                  <td>Mature individuals who lack prior experience, training, or exposure to a specific skill.</td>
+                  <td>
+                    <div class="vocab-example">"...elegant experiments showed that <strong>naive adults</strong> could develop the skill..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Metabolic chamber</div>
+                    <div class="vocab-pos">scientific noun</div>
+                  </td>
+                  <td>An enclosed environmental chamber used to measure oxygen uptake and caloric expenditure.</td>
+                  <td>
+                    <div class="vocab-example">"...measuring oxygen uptake of a rat stripping a cone in a <strong>metabolic chamber</strong>..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Calorimeter</div>
+                    <div class="vocab-pos">noun</div>
+                  </td>
+                  <td>An instrument used to measure the amount of heat energy and caloric value released by substances.</td>
+                  <td>
+                    <div class="vocab-example">"...comparing it with the benefit of the pine seeds measured by <strong>calorimeter</strong>."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Seed caching</div>
+                    <div class="vocab-pos">noun phrase</div>
+                  </td>
+                  <td>The behavioral act of hiding and storing large quantities of seeds in dispersed spots for winter.</td>
+                  <td>
+                    <div class="vocab-example">"It concerns the <strong>seed caching</strong> behaviour of Clark's Nutcracker..."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Solitary vs Social</div>
+                    <div class="vocab-pos">contrast pair</div>
+                  </td>
+                  <td>Living and hunting alone without a group versus living and foraging collectively in social flocks.</td>
+                  <td>
+                    <div class="vocab-example">"Nutcracker being rather <strong>solitary</strong> while the Jay forages in <strong>social</strong> groups."</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vocab-term">Adept at</div>
+                    <div class="vocab-pos">adjective + prep</div>
+                  </td>
+                  <td>Highly skilled, proficient, and expert at executing a task.</td>
+                  <td>
+                    <div class="vocab-example">"...the Mexican Jay is more <strong>adept at</strong> remembering, and so exploiting, the caches of others."</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Dictionary Tooltip -->
+  <div id="dictModal" class="dict-modal">
+    <button class="dict-close" onclick="closeDict()">✕</button>
+    <div class="dict-word" id="dictWord">Word</div>
+    <div class="dict-def" id="dictDef">Definition text...</div>
+  </div>
+
+  <script>
+    const dictionary = {
+      "classical": "Relating to the foundational classical conditioning principles documented by Ivan Pavlov.",
+      "conditioning": "A behavioral process whereby an association produces a predictable response.",
+      "stimulus": "An event or agent that evokes a specific functional reaction in an organ or organism.",
+      "stimuli": "Plural of stimulus.",
+      "salivate": "To secrete saliva, especially as an automatic physiological reflex in anticipation of food.",
+      "culprit": "The organism or factor responsible for an action, phenomenon, or damage.",
+      "versatile": "Able to adapt or be applied to many different skills and contexts.",
+      "cross-fostered": "Offspring raised by surrogate parents from a different genetic or cultural group.",
+      "calorimeter": "A laboratory apparatus used to determine caloric energy or heat capacity.",
+      "caching": "The hoarding or storing of items (like seeds) in hidden storage sites for future retrieval.",
+      "solitary": "Habitually living or foraging alone rather than in flocks or packs.",
+      "adept": "Highly proficient and skilled at doing something.",
+      "profit": "In bioenergetics: acquiring more metabolic energy than is expended in foraging.",
+      "nutcracker": "A corvid bird specialized in harvesting and storing conifer pine seeds.",
+      "operant": "Behavioral learning reinforced through rewarding or punishing consequences."
+    };
+
+    const userAnswers = {};
+    const correctAnswers = {
+      1: "D", 2: "A", 3: "C", 4: "E",
+      5: "FALSE", 6: "TRUE", 7: "NOT GIVEN", 8: "FALSE",
+      9: "less", 10: "social", 11: "watched", 12: "observer", 13: "Nutcracker"
+    };
+
+    const explanations = {
+      1: "Paragraph D compares the rats acquiring cone-stripping skills to humans learning how to operate a photocopier once someone shows them the first step.",
+      2: "Paragraph A explicitly cites Ivan Pavlov's 1900s research, the earliest foundational work in animal learning theory.",
+      3: "Paragraph C states: 'The culprit proved to be the versatile and athletic black rat (Rattus rattus)'.",
+      4: "Paragraph E describes metabolic chambers and calorimeter measurements to determine the energetic cost and profit margin.",
+      5: "FALSE: Paragraph C notes the investigation had 'no weighty theoretical intent' rather than a preset goal of studying rat learning.",
+      6: "TRUE: Paragraph C notes cones were stripped 'in sequence from base to tip' (bottom to top).",
+      7: "NOT GIVEN: Paragraph D uses a photocopier only as an analogy for being shown the switch; it does not mention transferring other experiences.",
+      8: "FALSE: Paragraph D proves through cross-fostering that the skill is not instinctual and must be learned from the mother."
+    };
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function goToParagraph(letter) {
+      const el = document.getElementById('para-' + letter);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('highlight-target');
+        setTimeout(() => {
+          el.classList.remove('highlight-target');
+        }, 2200);
+      }
+    }
+
+    function toggleHelper(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('active');
+      }
+    }
+
+    function checkChoice(qid, choice, btnElement) {
+      const container = btnElement.closest('.options-grid');
+      const qCard = document.getElementById('qcard-' + qid);
+      const fbBox = document.getElementById('fb-' + qid);
+      const isCorrect = (choice === correctAnswers[qid]);
+
+      container.querySelectorAll('.opt-btn').forEach(b => {
+        b.classList.remove('selected', 'is-correct', 'is-wrong');
+      });
+
+      if (isCorrect) {
+        btnElement.classList.add('is-correct');
+        qCard.classList.remove('answered-wrong');
+        qCard.classList.add('answered-correct');
+        fbBox.className = 'feedback-box show correct';
+        fbBox.innerHTML = `<strong>✓ Correct!</strong> ${explanations[qid] || ''}`;
+      } else {
+        btnElement.classList.add('is-wrong');
+        qCard.classList.remove('answered-correct');
+        qCard.classList.add('answered-wrong');
+        fbBox.className = 'feedback-box show wrong';
+        fbBox.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer is <strong>${correctAnswers[qid]}</strong>. ${explanations[qid] || ''}`;
+      }
+
+      userAnswers[qid] = isCorrect;
+      updateScore();
+    }
+
+    function checkGap(selectElement) {
+      const qid = selectElement.getAttribute('data-qid');
+      const val = selectElement.value;
+      const expected = selectElement.getAttribute('data-answer');
+
+      selectElement.classList.remove('correct', 'wrong');
+
+      if (!val) {
+        delete userAnswers[qid];
+      } else if (val.toLowerCase() === expected.toLowerCase()) {
+        selectElement.classList.add('correct');
+        userAnswers[qid] = true;
+      } else {
+        selectElement.classList.add('wrong');
+        userAnswers[qid] = false;
+      }
+
+      updateScore();
+    }
+
+    function updateScore() {
+      let correctCount = 0;
+      for (let i = 1; i <= 13; i++) {
+        if (userAnswers[i] === true) {
+          correctCount++;
+        }
+      }
+      document.getElementById('scoreTracker').textContent = `Score: ${correctCount} / 13`;
+    }
+
+    function setupWordDictionary() {
+      const pTextElements = document.querySelectorAll('.p-text');
+      pTextElements.forEach(p => {
+        const text = p.innerHTML;
+        const wrapped = text.replace(/([a-zA-Z]{4,})/g, '<span class="passage-word" onclick="lookupWord(\'$1\', event)">$1</span>');
+        p.innerHTML = wrapped;
+      });
+    }
+
+    function lookupWord(word, event) {
+      event.stopPropagation();
+      const cleanWord = word.toLowerCase().replace(/[^a-z]/g, '');
+      const modal = document.getElementById('dictModal');
+      const title = document.getElementById('dictWord');
+      const def = document.getElementById('dictDef');
+
+      title.textContent = word;
+      if (dictionary[cleanWord]) {
+        def.textContent = dictionary[cleanWord];
+      } else {
+        def.textContent = `A contextual term in animal behavioral biology and cognitive research.`;
+      }
+      modal.classList.add('show');
+    }
+
+    function closeDict() {
+      document.getElementById('dictModal').classList.remove('show');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setupWordDictionary();
+      document.addEventListener('click', (e) => {
+        const modal = document.getElementById('dictModal');
+        if (modal.classList.contains('show') && !modal.contains(e.target)) {
+          modal.classList.remove('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
